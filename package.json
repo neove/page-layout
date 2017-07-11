@@ -1,0 +1,32 @@
+{
+  "name": "ux-react-grid-layout",
+  "version": "1.0.9",
+  "description": "A draggable and resizable grid layout with responsive breakpoints, for React.",
+  "main": "index.js",
+  "scripts": {
+    "lint": "make lint",
+    "test": "make test",
+    "build": "make build",
+    "build-example": "make build-example",
+    "dev": "make dev",
+    "validate": "npm ls"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:STRML/react-grid-layout.git"
+  },
+  "keywords": [
+    "react",
+    "grid",
+    "drag",
+    "draggable",
+    "resize",
+    "resizable",
+    "fluid",
+    "responsive"
+  ],
+  "author": "Samuel Reed <samuel.trace.reed@gmail.com> (http://strml.net/)",
+  "license": "MIT",
+  "bugs": {
+  }
+}
