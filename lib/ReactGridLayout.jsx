@@ -277,7 +277,7 @@ export default class ReactGridLayout extends React.Component {
       oldDragItem: null,
       oldLayout: null,
     });
-
+    
     this.onLayoutMaybeChanged(newLayout, oldLayout);
   }
 
@@ -298,10 +298,12 @@ export default class ReactGridLayout extends React.Component {
     layout = moveElement(layout, l, x, y, true /* isUserAction */);
 
     // this.props.onDrag(layout, oldDragItem, l, placeholder, e, node);
+    const newLayout = compact(layout, this.props.verticalCompact)
     this.setState({
-      layout: compact(layout, this.props.verticalCompact),
-      activeDrag: placeholder
+      layout: newLayout,
+      activeDrag: null
     });
+    return newLayout;
   }
   /**
    * 在拖拽结束的地方新增一个grid
