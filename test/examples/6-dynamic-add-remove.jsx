@@ -23,7 +23,7 @@ var AddRemoveLayout = React.createClass({
 
   getInitialState() {
     return {
-      items: [0, 1, 2, 3, 4].map(function(i, key, list) {
+      items: [0].map(function(i, key, list) {
         return {i: i.toString(), x: i * 2, y: 0, w: 2, h: 2, add: i === (list.length - 1).toString()};
       }),
       newCounter: 0
@@ -64,7 +64,6 @@ var AddRemoveLayout = React.createClass({
       newCounter: this.state.newCounter + 1
     });
     let self = this;
-    
   },
 
   // We're using the cols coming back from this to calculate where to add new items.
