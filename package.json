@@ -10,7 +10,7 @@
     "build-example": "make build-example",
     "dev": "make dev",
     "validate": "npm ls",
-    "prepublishOnly": "make build"    
+    "prepublishOnly": "make build"
   },
   "repository": {
     "type": "git",
@@ -28,8 +28,7 @@
   ],
   "author": "Samuel Reed <samuel.trace.reed@gmail.com> (http://strml.net/)",
   "license": "MIT",
-  "bugs": {
-  },
+  "bugs": {},
   "dependencies": {
     "classnames": "^2.2.5",
     "lodash.isequal": "^4.0.0",
@@ -74,5 +73,8 @@
     "valiquire": "^0.3.0",
     "webpack": "^3.5.5",
     "webpack-dev-server": "^2.4.2"
-  }
+  },
+  "pre-commit": [
+    "test"
+  ]
 }
