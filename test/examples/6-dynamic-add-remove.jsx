@@ -6,7 +6,6 @@ var WidthProvider = require('react-grid-layout').WidthProvider;
 var ResponsiveReactGridLayout = require('react-grid-layout').Responsive;
 var ReactGridLayout = require('react-grid-layout');
 ResponsiveReactGridLayout = WidthProvider(ResponsiveReactGridLayout);
-
 /**
  * This layout demonstrates how to use a grid with a dynamic number of elements.
  */
