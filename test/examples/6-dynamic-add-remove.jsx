@@ -30,6 +30,7 @@ var AddRemoveLayout = React.createClass({
   },
 
   createElement(el) {
+    console.log(el)
     var removeStyle = {
       position: 'absolute',
       right: '2px',

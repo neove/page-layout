@@ -1,13 +1,12 @@
+import React from 'react'
 import ReactGridLayout from '../node_modules/react-grid-layout'
 import {utils} from '../node_modules/react-grid-layout'
 import GridItem from '../node_modules/react-grid-layout/build/GridItem'
-import React from 'react'
-let {getLayoutItem, isEqual}  = utils;
+import isEqual from "lodash.isequal";
+let {getLayoutItem,childrenEqual,synchronizeLayoutWithChildren,moveElement,compact}  = utils;
 export default class PatchReactGridLayout extends ReactGridLayout{
-  constructor(props){
-    super(props);
-  }
   componentWillReceiveProps(nextProps){
+
     let newLayoutBase;
     // Allow parent to set layout directly.
     if (!isEqual(nextProps.layout, this.props.layout)) {
@@ -18,7 +17,6 @@ export default class PatchReactGridLayout extends ReactGridLayout{
       // what is in props.
       newLayoutBase = this.state.layout;
     }
-
     //如果有占位组件的话
     let placeHolderCompoentIndex = nextProps.layout.findIndex(item => item.isPlaceHolder);
     // We need to regenerate the layout.
@@ -66,6 +64,7 @@ export default class PatchReactGridLayout extends ReactGridLayout{
     let { x, y } = this.refs.gridItem.calcXY(pixelY, pixelX);
     let { layout } = this.state;
     const l = getLayoutItem(layout, i);
+    debugger
     if (!l) return;
 
     // Move the element here
