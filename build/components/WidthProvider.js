@@ -1,20 +1,12 @@
-'use strict';
+"use strict";
 
 exports.__esModule = true;
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _react = require('react');
+var _WidthProvider = require("../../node_modules/react-grid-layout/build/components/WidthProvider");
 
-var _react2 = _interopRequireDefault(_react);
-
-var _propTypes = require('prop-types');
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
-var _reactDom = require('react-dom');
-
-var _reactDom2 = _interopRequireDefault(_reactDom);
+var _WidthProvider2 = _interopRequireDefault(_WidthProvider);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -24,64 +16,30 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-/*
- * A simple HOC that provides facility for listening to container resizes.
- */
-var WidthProvider = function WidthProvider(ComposedComponent) {
-  var _class, _temp2;
+exports.default = function (ComposedComponent) {
+    var BaseComp = (0, _WidthProvider2.default)(ComposedComponent);
+    return function (_BaseComp) {
+        _inherits(WidthProviderPatch, _BaseComp);
 
-  return _temp2 = _class = function (_React$Component) {
-    _inherits(_class, _React$Component);
+        function WidthProviderPatch() {
+            _classCallCheck(this, WidthProviderPatch);
 
-    function _class() {
-      var _temp, _this, _ret;
+            return _possibleConstructorReturn(this, _BaseComp.apply(this, arguments));
+        }
 
-      _classCallCheck(this, _class);
+        WidthProviderPatch.prototype.render = function render() {
+            if (this.props.measureBeforeMount && !this.mounted) {
+                return React.createElement("div", {
+                    className: this.props.className,
+                    style: this.props.style
+                });
+            }
 
-      for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-        args[_key] = arguments[_key];
-      }
+            return React.createElement(ComposedComponent, _extends({
+                ref: this.props.forwardRef || "ComposedComponent"
+            }, this.props, this.state));
+        };
 
-      return _ret = (_temp = (_this = _possibleConstructorReturn(this, _React$Component.call.apply(_React$Component, [this].concat(args))), _this), _this.state = {
-        width: 1280
-      }, _this.mounted = false, _this.onWindowResize = function (_event) {
-        if (!_this.mounted) return;
-        var node = _reactDom2.default.findDOMNode(_this); // Flow casts this to Text | Element
-        if (node instanceof HTMLElement) _this.setState({ width: node.offsetWidth });
-      }, _temp), _possibleConstructorReturn(_this, _ret);
-    }
-
-    _class.prototype.componentDidMount = function componentDidMount() {
-      this.mounted = true;
-
-      window.addEventListener('resize', this.onWindowResize);
-      // Call to properly set the breakpoint and resize the elements.
-      // Note that if you're doing a full-width element, this can get a little wonky if a scrollbar
-      // appears because of the grid. In that case, fire your own resize event, or set `overflow: scroll` on your body.
-      this.onWindowResize();
-    };
-
-    _class.prototype.componentWillUnmount = function componentWillUnmount() {
-      this.mounted = false;
-      window.removeEventListener('resize', this.onWindowResize);
-    };
-
-    _class.prototype.render = function render() {
-      if (this.props.measureBeforeMount && !this.mounted) {
-        return _react2.default.createElement('div', { className: this.props.className, style: this.props.style });
-      }
-
-      return _react2.default.createElement(ComposedComponent, _extends({ ref: 'ComposedComponent' }, this.props, this.state));
-    };
-
-    return _class;
-  }(_react2.default.Component), _class.defaultProps = {
-    measureBeforeMount: false
-  }, _class.propTypes = {
-    // If true, will not render children until mounted. Useful for getting the exact width before
-    // rendering, to prevent any unsightly resizing.
-    measureBeforeMount: _propTypes2.default.bool
-  }, _temp2;
+        return WidthProviderPatch;
+    }(BaseComp);
 };
-
-exports.default = WidthProvider;
